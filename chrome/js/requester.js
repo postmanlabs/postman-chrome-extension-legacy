@@ -462,7 +462,7 @@ pm.settings = {
         pm.settings.create("retainLinkHeaders", false);
         pm.settings.create("usePostmanProxy", false);
         pm.settings.create("proxyURL", "");
-        pm.settings.create("lastRequest");
+        pm.settings.create("lastRequest", "");
 
         $('#history-count').val(pm.settings.get("historyCount"));
         $('#auto-save-request').val(pm.settings.get("autoSaveRequest") + "");
@@ -750,9 +750,16 @@ pm.request = {
             this.addListeners();
         }
 
-        if (pm.settings.get("lastRequest")) {
-            var lastRequest = JSON.parse(pm.settings.get("lastRequest"));
-            pm.request.loadRequestInEditor(lastRequest);
+        var lastRequest = pm.settings.get("lastRequest");
+        if (lastRequest !== "") {
+            try {
+                var j = JSON.parse(lastRequest);
+                pm.request.loadRequestInEditor(j);
+            }
+            catch(e) {
+                console.log("Postman: Loading lastRequest error");
+            }
+
         }
     },
 
