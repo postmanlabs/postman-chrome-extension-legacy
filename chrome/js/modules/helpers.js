@@ -103,18 +103,6 @@ pm.helpers = {
             var urlParts = pm.request.splitUrlIntoHostAndPath(url);
             var digestUri = urlParts.path;
 
-            console.log(algorithm);
-            console.log(username);
-            console.log(realm);
-            console.log(password);
-            console.log(method);
-            console.log(nonce);
-            console.log(nonceCount);
-            console.log(clientNonce);
-            console.log(opaque);
-            console.log(qop);
-            console.log(body);
-
             var a1;
 
             if(algorithm === "MD5-sess") {

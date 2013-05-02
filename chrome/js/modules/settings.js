@@ -6,6 +6,7 @@ pm.settings = {
 
     createSettings: function() {
         pm.settings.create("historyCount", 100);
+        pm.settings.create("syncWithGoogleDrive", false);
         pm.settings.create("autoSaveRequest", true);
         pm.settings.create("selectedEnvironmentId", true);
         pm.settings.create("lineWrapping", true);
@@ -23,6 +24,7 @@ pm.settings = {
 
     initValues: function() {
         $('#history-count').val(pm.settings.get("historyCount"));
+        $('#sync-with-google-drive').val(pm.settings.get("syncWithGoogleDrive") + "");
         $('#auto-save-request').val(pm.settings.get("autoSaveRequest") + "");
         $('#retain-link-headers').val(pm.settings.get("retainLinkHeaders") + "");
         $('#send-no-cache-header').val(pm.settings.get("sendNoCacheHeader") + "");
@@ -36,6 +38,16 @@ pm.settings = {
     initListeners: function() {
         $('#history-count').change(function () {
             pm.settings.set("historyCount", $('#history-count').val());
+        });
+
+        $('#sync-with-google-drive').change(function () {
+            var val = $('#sync-with-google-drive').val();
+            if (val == "true") {
+                pm.settings.set("syncWithGoogleDrive", true);
+            }
+            else {
+                pm.settings.set("syncWithGoogleDrive", false);
+            }
         });
 
         $('#auto-save-request').change(function () {

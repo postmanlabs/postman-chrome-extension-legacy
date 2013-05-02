@@ -56,6 +56,7 @@ pm.indexedDB = {
 
                     var transaction = event.target.result;
                     transaction.oncomplete = function () {
+                        pm.gdrivesync.init();
                         pm.history.getAllRequests();
                         pm.envManager.getAllEnvironments();
                         pm.headerPresets.init();
@@ -117,6 +118,7 @@ pm.indexedDB = {
         };
 
         request.onsuccess = function (e) {
+            pm.gdrivesync.init();
             pm.indexedDB.db = e.target.result;
             pm.history.getAllRequests();
             pm.envManager.getAllEnvironments();
