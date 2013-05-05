@@ -130,12 +130,13 @@ pm.settings = {
     },
 
     create:function (key, defaultVal) {
-        if (localStorage[key]) {
-            pm.settings[key] = localStorage[key];
+        if (chrome.storage.local.get(key)) {
+            chrome.storage.local.set({key: chrome.storage.local.get(key)});
         }
         else {
             if (defaultVal !== "undefined") {
                 pm.settings[key] = defaultVal;
+                chrome.storage.local.set({key: defaultVal});
                 localStorage[key] = defaultVal;
             }
         }
@@ -143,11 +144,12 @@ pm.settings = {
 
     set:function (key, value) {
         pm.settings[key] = value;
-        localStorage[key] = value;
+        chrome.storage.local.set({key: value});
     },
 
     get:function (key) {
-        var val = localStorage[key];
+        chrome.storage.local.get(key);
+
         if (val === "true") {
             return true;
         }
@@ -155,7 +157,7 @@ pm.settings = {
             return false;
         }
         else {
-            return localStorage[key];
+            return chrome.storage.local.get(key);
         }
     }
 };

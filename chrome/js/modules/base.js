@@ -177,6 +177,8 @@ $(document).ready(function () {
     pm.init();
 });
 
+/*
 $(window).on("unload", function () {    
     pm.request.saveCurrentRequestToLocalStorage();
 });
+*/
