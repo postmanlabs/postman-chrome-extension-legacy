@@ -28,6 +28,9 @@ pm.helpers = {
         else if (type === 'digest') {
             this.digest.process();
         }
+        else if (type === 'awssig4') {
+            this.awssigv4.process();
+        }
         return false;
     },
 
@@ -44,6 +47,9 @@ pm.helpers = {
 
         if (type.toLowerCase() === 'oauth1') {
             this.oAuth1.generateHelper();
+        }
+        if (type.toLowerCase() === 'awssig4auth') {
+            this.awssigv4.generateHelper();
         }
 
         $('.request-helpers').css("display", "none");
@@ -424,5 +430,141 @@ pm.helpers = {
                 }
             }
         }
+    },
+    awssigv4 : {  // http://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html
+// test cases - IAM POST & GET Action=ListUsers&Version=2010-05-08
+//              EC2 POST & GET Action=ImportKeyPair&KeyName=my-key-pair&PublicKeyMaterial=...
+//              S3 GET / & PUT /bucketname/key.name
+//              Something with extended chars in the querystring or post
+//              https://iam.amazonaws.com/?Action=ListUsers&Version=2010-05-08&xxxx=日本語のページのみ 条件指定
+//              Version=2010-05-08&Action=ListUsers - ensure querystrings are sorted
+//              DynamoDB would be nice, but complicated by x-amz-target header http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/MakingHTTPRequests.html
+      generateHelper: function () {
+          var d = new Date();
+          var Y = d.getUTCFullYear();
+          var M = d.getUTCMonth() + 1;
+          var D = d.getUTCDate();
+          var H = d.getUTCHours();
+          var MM = d.getUTCMinutes();
+          var SS = d.getUTCSeconds();
+          var res = Y +
+                ((M < 10) ? '0' + M : ''+M) +
+                ((D < 10) ? '0' + D : ''+D) + "T" +
+                ((H < 10) ? '0' + H : ''+H) +
+                ((MM < 10) ? '0' + MM : ''+MM) +
+                ((SS < 10) ? '0' + SS : ''+SS) + "Z";
+          $('#request-helper-awssig4-amzdate').val(res);
+      },
+      process: function () {
+        var datetime = pm.envManager.getCurrentValue($("#request-helper-awssig4-amzdate").val());
+        var date = datetime.substring(0, 8);
+        var region = pm.envManager.getCurrentValue($("#request-helper-awssig4-region").val());
+        var service = pm.envManager.getCurrentValue($("#request-helper-awssig4-service").val());
+        var HTTPRequestMethod = pm.request.method.toUpperCase();
+
+        var parser = document.createElement('a');
+        parser.href = $('#url').val();
+
+        var CanonicalURI = parser.pathname;
+        var CanonicalQueryString = "";
+        var urlParams = $('#url-keyvaleditor').keyvalueeditor('getValues');
+
+        //Sort the encoded parameter names by character code (that is, in strict ASCII order)
+        urlParams.sort(function(a, b){
+                  var aName = a.key;
+                  var bName = b.key;
+                  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+                });
+
+        for (var i = 0; i < urlParams.length; i++) {
+            if (CanonicalQueryString != "") CanonicalQueryString += "&";
+            var param = urlParams[i];
+            CanonicalQueryString += (param.key + '=' + param.value);
+        }
+
+        var awsheaders =  new Object();
+        awsheaders['Host'] =  parser.hostname;  // https://gist.github.com/jlong/2428561
+        awsheaders['X-Amz-Date'] =  datetime;
+
+        var CanonicalHeaders = '';  //CanonicalHeaders need to be in alphabetical order but we are controlling the two headers we sign
+        for (var key in awsheaders)
+        {
+            var canonicalValue = awsheaders[key];
+            canonicalValue = canonicalValue.trim() + '\n';
+            CanonicalHeaders += key.toLowerCase() + ":" + canonicalValue;
+        }
+        var SignedHeaders = 'host;x-amz-date';
+
+        if (pm.request.method.toUpperCase() == "POST") {
+          if (pm.request.body.mode === "params" || pm.request.body.mode === "raw" ) { //form-data = file upload
+              alert('not supported i guess');
+          }
+        }
+
+
+        var payload = (HTTPRequestMethod != "GET") ? pm.request.getRequestBodyToBeSent() : "";
+        console.log("Payload");
+        console.log(payload);
+
+        awsheaders['X-Amz-Content-Sha256'] =  CryptoJS.SHA256(payload).toString(CryptoJS.enc.Hex);
+        var hashPayload = CryptoJS.SHA256(payload);
+
+        var CanonicalRequest =
+          HTTPRequestMethod + '\n' +
+          CanonicalURI + '\n' +
+          CanonicalQueryString + '\n' +
+          CanonicalHeaders + '\n' +
+          SignedHeaders + '\n' +
+          hashPayload;
+
+        console.log("CanonicalRequest");
+        console.log(CanonicalRequest);
+
+        var HashedCanonicalRequest = CryptoJS.SHA256(CanonicalRequest);
+        var CredentialScope = date + '/' + region + '/' + service + '/aws4_request';
+        var StringToSign = 'AWS4-HMAC-SHA256' + '\n'
+        + datetime + '\n'
+        + CredentialScope + '\n'
+        + HashedCanonicalRequest;
+
+        console.log("StringToSign");
+        console.log(StringToSign);
+
+        var kAccessKey = pm.envManager.getCurrentValue($("#request-helper-awssig4-accesskeyid").val());
+        var kSecret = pm.envManager.getCurrentValue($("#request-helper-awssig4-secretaccesskey").val());
+
+        var kDate = CryptoJS.HmacSHA256(date, "AWS4" + kSecret);
+        var kRegion = CryptoJS.HmacSHA256(region, kDate);
+        var kService = CryptoJS.HmacSHA256(service, kRegion);
+        var kSigning = CryptoJS.HmacSHA256("aws4_request", kService);
+        var signature = CryptoJS.HmacSHA256(StringToSign, kSigning);
+
+        awsheaders['Authorization'] =  "AWS4-HMAC-SHA256 Credential=" + kAccessKey + "/" + CredentialScope + ", SignedHeaders=" + SignedHeaders + ", Signature=" + signature;
+
+        console.log("Authorization");
+        console.log(awsheaders['Authorization']);
+
+        var headers = pm.request.headers;
+        $.each(['Authorization', 'X-Amz-Date', 'X-Amz-Content-Sha256'], function()
+        {
+            var pos = findPosition(headers, "key", this);
+
+            if (pos >= 0) {
+                headers[pos] = {
+                    key: this,
+                    name: this,
+                    value: awsheaders[this]
+                };
+            }
+            else {
+                headers.push({key: this, name: this, value: awsheaders[this]});
+            }
+        });
+
+        pm.request.headers = headers;
+        $('#headers-keyvaleditor').keyvalueeditor('reset', headers);
+        pm.request.openHeaderEditor();
+
+      }
     }
 };
