@@ -1,17 +1,11 @@
 # Postman Chrome Extension Legacy Version
 
-This repository contains codebase for Postman Chrome Extension legacy version - `v0.0.1` to `v0.9.9`. Updates pertaining to newer versions are **not** pushed to this repository.
+This repository contains codebase for Postman Chrome Extension legacy version - `v0.3.0.0` to `v0.8.4.14`. Updates pertaining to newer versions are **not** pushed to this repository.
 
-### If you are looking to report issues pertaining to [latest Postman App](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop), visit our support repository at [https://github.com/postmanlabs/postman-app-support](https://github.com/postmanlabs/postman-app-support)
+### If you are looking to report issues pertaining to the [latest Postman App](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop), visit our support repository at [https://github.com/postmanlabs/postman-app-support](https://github.com/postmanlabs/postman-app-support)
 
-## Quick links
+---
 
-- Homepage - http://www.getpostman.com
-- Blog (Tutorials/Updates) - http://blog.getpostman.com
-- Packaged app (v0.9.6) - https://chrome.google.com/webstore/detail/postman-rest-client/fhbjgbiflinjbdggehcddcbncdddomop
-- Jetpacks for Postman - http://blog.getpostman.com/index.php/2014/01/16/ridiculously-easy-api-testing-introducing-jetpacks-for-postman/
-- Documentation - http://www.getpostman.com/docs/
-- Interceptor - https://chrome.google.com/webstore/detail/postman-interceptor/aicmkgpgakddgnaphhhpliifpcfhicfo
 
 ## About Postman
 
