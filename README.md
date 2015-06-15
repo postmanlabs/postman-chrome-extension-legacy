@@ -1,5 +1,11 @@
-Quick links
-=======
+# Postman Chrome Extension Legacy Version
+
+This repository contains codebase for Postman Chrome Extension legacy version - `v0.0.1` to `v0.9.9`. Updates pertaining to newer versions are **not** pushed to this repository.
+
+### If you are looking to report issues pertaining to [latest Postman App](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop), visit our support repository at [https://github.com/postmanlabs/postman-app-support](https://github.com/postmanlabs/postman-app-support)
+
+## Quick links
+
 - Homepage - http://www.getpostman.com
 - Blog (Tutorials/Updates) - http://blog.getpostman.com
 - Packaged app (v0.9.6) - https://chrome.google.com/webstore/detail/postman-rest-client/fhbjgbiflinjbdggehcddcbncdddomop
@@ -7,15 +13,14 @@ Quick links
 - Documentation - http://www.getpostman.com/docs/
 - Interceptor - https://chrome.google.com/webstore/detail/postman-interceptor/aicmkgpgakddgnaphhhpliifpcfhicfo
 
-About Postman
-=======
+## About Postman
+
 Postman helps you be more efficient while working with APIs. Postman is a scratch-your-own-itch project. The need for it arose while one of the developers was creating an API for his project. After looking around for a number of tools, nothing felt just right. The primary features added were a history of sent requests and collections.
-A number of other features have been added since the initial release. A small list is below. To see a fancier page and a video tutorial, check out http://www.getpostman.com
+A number of other features have been added since the initial release. A small list is below. To see a fancier page and a video tutorial, check out [http://www.getpostman.com/](http://www.getpostman.com).
 
-Features
-========
+## Features
 
-Create requests quickly.
+### Create requests quickly.
 
 - Compact layout
 - HTTP requests with file upload support
@@ -29,45 +34,42 @@ Create requests quickly.
 - Use environment variables to easily shift between settings. Great for testing production, staging or local setups.
 - Keyboard shortcuts to maximize your productivity
 
-Document and share APIs.
+### Document and share APIs.
 
 - Use collections to organize requests.
 - Document requests inside collections. You can even store entire HTML notes. Postman uses Bootstrap so you can use it too to style your notes.
 - Download and share collections with your team of developers.
 
-Installing the zip file
-=========================
+## Installation
+
+### Installing from the zip file
 
 If you downloaded the Postman zip file here is what you need to do to install it as a developer extension:
 
 1. Go to Tools > Extensions inside Chrome by clicking on the wrench icon on top right.
 2. Select "Load unpacked extension"
 3. Select the "chrome" folder with manifest.json in it's root
-4. Postman will be installed as a developer extension. The installation from the Chrome Web Store will remain independent with all your data.
+4. Postman will be installed as a developer extension. 
 
-Building and Developing
-=========================
-1. Install the dependencies
-<pre>
-sudo npm install -g grunt grunt-cli
-</pre>
-2. Generate the template.js and request.js files by running grunt. You can watch the folder for changes using:
-<pre>
-	grunt watch
-</pre>
-3. For misc. grunt tasks, look at grunt.js.
+The installation from the Chrome Web Store will remain independent with all your data.
 
-If JavaScript is disabled for all sites
-=======================================
+### Building and installing from source
 
-If JavaScript is disabled for all sites, in order to use the Postman packaged app, you will need to set an exception for it.
+1. Install the dependencies `sudo npm install -g grunt grunt-cli`.
+2. Generate the template.js and request.js files by running grunt. You can watch the folder for changes using `grunt watch`.
+3. For miscellaneous grunt tasks, look at grunt.js.
 
-In chrome settings, go to `Privacy > Content Settings > JavaScript > Manage Exceptions` and add the following exception `chrome-extensions://<postman_extension_id>/`.
+## Submitting bugs for this legacy version of Postman Client
 
-Postman packaged app's' extension ID can be found at `chrome-extensions://`.  Ensure `developer mode` is enabled and look for the ID under `Postman - REST Client (Packaged App)`.
+If you are using this legacy version locally, you may submit bugs on GitHub itself. Please include Postman and Chrome version along with your operating system.
+
+> Report Issues at: [https://github.com/postmanlabs/postman-chrome-extension-legacy/issues](https://github.com/postmanlabs/postman-chrome-extension-legacy/issues)
 
 
-Submitting bugs
-===============
+## Important Notes
 
-Please add the Postman version along with your operating system and Chrome version along with bug requests. 
+### If JavaScript is disabled for all sites
+
+If JavaScript is disabled for all sites, in order to use the Postman packaged app, you will need to set an exception for it. In chrome settings, go to _Privacy > Content Settings > JavaScript > Manage Exceptions_ and add the following exception `chrome-extensions://<postman_extension_id>/`.
+
+Postman packaged app's' extension ID can be found at `chrome-extensions://`.  Ensure **developer mode** is enabled and look for the ID under `Postman - REST Client`.
