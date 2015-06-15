@@ -1,5 +1,5 @@
 {
-  "name": "my-project-name",
+  "name": "postman-chrome-extension-legacy",
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4.2",
