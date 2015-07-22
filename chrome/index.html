@@ -9,21 +9,30 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css"/>
     <link rel="stylesheet" type="text/css" href="codemirror/lib/codemirror.css"/>
     <link rel="stylesheet" type="text/css" href="codemirror/theme/eclipse.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="css/keyvalueeditor.css"/>
 </head>
 <body>
 <div id="container" class="clearfix">
+<div id="v3-banner">
+    <div class="banner-wrapper">
+        <span class="banner-logo"></span>
+        <span class="banner-text" id="banner-new-version">A new version of Postman is available. What's new?</span>
+    </div>
+    <a class="banner-close banner-link" rel="tooltip" data-placement="bottom" data-original-title="not now">
+        <img src="img/delete_light.svg">
+    </a>
+</div>
+<div class="v3-popover-wrapper"></div>
 <div id="sidebar-footer">
-    <a id="upgrade"
-        rel="popover"
-        data-trigger="hover"
-        data-placement="top"
-        data-content="You are using the legacy version of Postman. Postman v2.0 let's you write API tests in Javascript, run entire collections, use cookies and do a lot more!"
-        data-original-title="Switch to Postman 2.0"
-        target="_blank"
-        href="http://blog.getpostman.com/index.php/2013/09/05/postman-packaged-app-release/">Switch to Postman 2.0 Chrome App</a>
-    <a id="donate" href="http://www.getpostman.com/supporters" target="_blank">Supporters</a>
+    <div class="v3-sidebar">
+        <span class="sidebar-logo"></span>
+        <span class="sidebar-text">Get Postman 3.0</span>
+    </div>
+    <div class="sidebar-supporters">
+        <a id="donate" href="http://www.getpostman.com/supporters" target="_blank">Supporters</a>
+    </div>
 </div>
 <div id="sidebar-toggle">
     <img src="img/tri_arrow_left.png"/>

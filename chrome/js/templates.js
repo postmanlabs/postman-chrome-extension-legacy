@@ -686,3 +686,12 @@ function program1(depth0,data) {
   if(stack1 || stack1 === 0) { return stack1; }
   else { return ''; }
   });
+
+this["Handlebars"]["templates"]["v3_carousel"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div id=\"v3-carousel\" class=\"carousel slide\">\n	<div class=\"v3-carousel-close-button-wrapper\">\n		<a class=\"v3-carousel-close-button\"><img src=\"img/delete_dark.svg\"></a>\n	</div>\n	<div class=\"carousel-inner\">\n		<div class=\"active item\"><img draggable=\"false\" src=\"img/v3_migration/migration_1.jpg\" class=\"carousel-image\"></div>\n		<div class=\"item\"><img draggable=\"false\" src=\"img/v3_migration/migration_2.jpg\" class=\"carousel-image\"></div>\n		<div class=\"item\"><img draggable=\"false\" src=\"img/v3_migration/migration_3.jpg\" class=\"carousel-image\"></div>\n		<div class=\"item\"><img draggable=\"false\" src=\"img/v3_migration/migration_4.jpg\" class=\"carousel-image\"></div>\n		<div class=\"item\"><img draggable=\"false\" src=\"img/v3_migration/migration_5.jpg\" class=\"carousel-image\"></div>\n		<div class=\"item\"><img draggable=\"false\" src=\"img/v3_migration/migration_6.jpg\" class=\"carousel-image\"></div>\n	</div>\n	<ol class=\"carousel-indicators\">\n		<li data-target=\"#v3-carousel\" data-slide-to=\"0\" class=\"active\"></li>\n		<li data-target=\"#v3-carousel\" data-slide-to=\"1\"></li>\n		<li data-target=\"#v3-carousel\" data-slide-to=\"2\"></li>\n		<li data-target=\"#v3-carousel\" data-slide-to=\"3\"></li>\n		<li data-target=\"#v3-carousel\" data-slide-to=\"4\"></li>\n		<li data-target=\"#v3-carousel\" data-slide-to=\"5\"></li>\n	</ol>\n	<div class=\"v3-carousel-button-wrapper\">\n		<a class=\"v3-carousel-button\" href=\"https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop\" target=\"_blank\">Get it now, it's free</a>\n	</div>\n</div>\n\n";
+  });
