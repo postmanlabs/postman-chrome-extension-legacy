@@ -20,6 +20,7 @@ pm.settings = {
         pm.settings.create("variableDelimiter", "{{...}}");
         pm.settings.create("languageDetection", "auto");
         pm.settings.create("haveDonated", false);
+        pm.settings.create("v3BannerDismissed", false);
     },
 
     initValues: function() {
