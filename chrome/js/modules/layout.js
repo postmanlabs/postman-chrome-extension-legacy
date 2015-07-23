@@ -412,8 +412,11 @@ pm.layout = {
     },
 
     hideV3Popover: function(popover) {
+        $(".v3-carousel-button").off();
         $(popover).popover("hide");
         $('.v3-popover-wrapper').hide();
+        $("#modal-backdrop").hide();
+        $(".v3-sidebar").removeClass("force-click");
     },
 
     onModalOpen:function (activeModal) {
