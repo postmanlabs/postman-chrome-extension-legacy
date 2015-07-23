@@ -334,8 +334,10 @@ pm.layout = {
             html: true,
             container: '.v3-popover-wrapper'
         }).on("click", function () {
-            that.showV3Popover(this);
+            that.showV3Popover(this, "topbar");
+            tracker.sendAppView("virtualScreen/upgrade2/notification_click");
         });
+        tracker.sendAppView("virtualScreen/upgrade2/notification_shown");
 
         var that = this;
         $(".banner-close").on("click", function(){
@@ -355,7 +357,8 @@ pm.layout = {
             html: true,
             container: '.v3-popover-wrapper'
         }).on("click", function () {
-            that.showV3Popover(this);
+            that.showV3Popover(this, "sidebar");
+            tracker.sendAppView("virtualScreen/upgrade2/bottomSticker_click");
         });
     },
 
@@ -367,20 +370,31 @@ pm.layout = {
         pm.settings.set("v3BannerDismissed", true);
     },
 
-    showV3Popover: function(popover) {
+    showV3Popover: function(popover, location) {
         var that = this;
         $('.v3-popover-wrapper').show();
         $('.v3-popover-wrapper').on("click", function(){
             this.hideV3Popover(popover);
         }.bind(this));
         $(popover).popover("show");
+        $("#modal-backdrop").show();
         $(".v3-popover-wrapper .popover").on("click", function(e){
             e.stopPropagation();
         });
         $('.v3-carousel-close-button').on("click", function(){
             this.hideV3Popover(popover);
         }.bind(this));
+        if(location==="sidebar") {
+            $(".v3-popover-wrapper .popover").css('top','initial');
+            $(".v3-sidebar").addClass("force-click");
+        }
         this.initV3Carousel();
+
+        //this event handler will be removed on popover hide
+        $(".v3-carousel-button").click(function() {
+            tracker.sendAppView("virtualScreen/upgrade2/getApp_click");
+            window.open("https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop", "_blank");
+        });
     },
 
     initV3Carousel: function() {

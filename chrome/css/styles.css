@@ -15,7 +15,6 @@ a, a:hover {
 #container {
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 #v3-banner {
@@ -23,6 +22,9 @@ a, a:hover {
     background: #54A3F2;
     display: none;
     text-align: center;
+    z-index: 1001;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
 .banner-wrapper {
@@ -35,7 +37,7 @@ a, a:hover {
 .banner-logo {
     width: 26px;
     height: 26px;
-    background-image: url("../img/postman_logo.png");
+    background-image: url("../img/postman_logo_v3.png");
     background-repeat: no-repeat;
     background-size: contain;
     float: left;
@@ -84,7 +86,7 @@ a, a:hover {
     position: absolute;
     color: white;
     text-decoration: none;
-    right: 15px;
+    right: 34px;
     top: 2px;
     z-index: 110;
     height: 25px;
@@ -587,14 +589,14 @@ li .right {
 }
 
 #sidebar-footer {
-    background-color: #000;
+    background-color: #4D4D4D;
     font-size: 11px;
     font-weight: bold;
     position: fixed;
     bottom: 0;
     width: 350px;
     height: 40px;
-    z-index: 50;
+    z-index: 1003;
 }
 
 .v3-sidebar {
@@ -602,6 +604,28 @@ li .right {
     width: 250px;
     display: none;
     cursor: pointer;
+    height: 100%;
+    background-color: #666666;
+    z-index: 1004;
+    position: relative;
+}
+
+#modal-backdrop {
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    position: absolute;
+    background-color: black;
+    opacity: 0.5;
+    display: none;
+}
+
+.v3-sidebar:hover {
+    background-color: #54A3F2;
+}
+
+.v3-sidebar.force-click { 
+    background-color: #54A3F2; 
 }
 
 #sidebar-footer .popover .popover-title {
@@ -613,9 +637,9 @@ li .right {
     position: absolute;
     bottom: 0;
     top: 0;
-    left: 0;
+    left: 6px;
     right: 0;
-    z-index: 105;
+    z-index: 1002;
 }
 
 .v3-popover-wrapper .popover .popover-title {
@@ -631,21 +655,22 @@ li .right {
 .v3-popover-wrapper .popover.bottom {
     width: 50% !important;
     left: 25% !important;
-    height: 80% !important;
+    height: 85% !important;
     border-radius: 3px;
 }
 
 .v3-popover-wrapper .popover.top {
     width: 50% !important;
-    left: 2% !important;
+    left: 0.1% !important;
     height: 80% !important;
-    bottom: 38px !important;
-    top: initial !important;
+    bottom: 48px !important;
+    /* top: initial !important; */
     border-radius: 3px;
+    top: initial;
 }
 
 .v3-popover-wrapper .popover.top .arrow {
-    left: 10%;
+    left: 4%;
 }
 
 .v3-popover-wrapper .popover-content {
@@ -676,13 +701,13 @@ li .right {
 }
 
 .v3-carousel-button-wrapper {
-    margin-top: 35px;
+    margin-top: 28px;
 }
 
 .v3-carousel-button {
-    border: 1px solid #54A3F2;
+    border: 2px solid #54A3F2;
     border-radius: 3px;
-    padding: 4px;
+    padding: 4px 10px 4px 10px;
     color: #54A3F2;
     font-family: 'Titillium Web';
     font-weight: 600;
@@ -697,7 +722,7 @@ li .right {
 .sidebar-logo {
     width: 32px;
     height: 32px;
-    background-image: url("../img/postman_logo.png");
+    background-image: url("../img/postman_logo_v3.png");
     background-repeat: no-repeat;
     background-size: contain;
     float: left;
@@ -711,24 +736,25 @@ li .right {
     font-weight: 600;
     font-size: 15px;
     float: left;
-    margin-top: 10px;
+    margin-top: 12px;
     margin-left: 10px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .carousel-indicators {
     margin: 0;
     list-style: none;
     display: inline-block;
-    padding-top: 20px;
+    padding-top: 10px;
     margin: 0 auto;
 }
 
 .carousel-indicators li {
     display: block;
     float: left;
-    width: 10px;
-    height: 10px;
-    margin-left: 5px;
+    width: 8px;
+    height: 8px;
+    margin-left: 8px;
     background-color: #CCCCCC;
     border-radius: 5px;
     cursor: pointer;
@@ -753,8 +779,8 @@ li .right {
 }
 
 #donate {
-    font-size: 13px;
-    margin-top: 10px;
+    font-size: 12px;
+    margin-top: 13px;
     display: inline-block;
     font-weight: 300;
     font-family: 'Titillium Web';
