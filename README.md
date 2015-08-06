@@ -73,3 +73,5 @@ If you are using this legacy version locally, you may submit bugs on GitHub itse
 If JavaScript is disabled for all sites, in order to use the Postman packaged app, you will need to set an exception for it. In chrome settings, go to _Privacy > Content Settings > JavaScript > Manage Exceptions_ and add the following exception `chrome-extensions://<postman_extension_id>/`.
 
 Postman packaged app's' extension ID can be found at `chrome-extensions://`.  Ensure **developer mode** is enabled and look for the ID under `Postman - REST Client`.
+
+[![Analytics](https://ga-beacon.appspot.com/UA-43979731-9/postman-chrome-extension-legacy/readme)](https://www.getpostman.com)
