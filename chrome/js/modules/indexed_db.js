@@ -6,7 +6,10 @@ pm.indexedDB = {
     },
 
     open_v21:function () {
-
+        // IndexedDB implementations still use API prefixes
+        var indexedDB = window.indexedDB || // Use the standard DB API
+            window.mozIndexedDB || // Or Firefox's early version of it
+            window.webkitIndexedDB;            // Or Chrome's early version
         var request = indexedDB.open("postman", "POSTman request history");
         request.onsuccess = function (e) {
             var v = "0.6";
@@ -77,7 +80,10 @@ pm.indexedDB = {
     },
 
     open_latest:function () {
-
+        // IndexedDB implementations still use API prefixes
+        var indexedDB = window.indexedDB || // Use the standard DB API
+            window.mozIndexedDB || // Or Firefox's early version of it
+            window.webkitIndexedDB;            // Or Chrome's early version
         var v = 11;
         var request = indexedDB.open("postman", v);
         request.onupgradeneeded = function (e) {
