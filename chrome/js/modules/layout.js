@@ -314,9 +314,9 @@ pm.layout = {
     },
 
     showV3Onboarding: function() {
-        var bannerDismissed = pm.settings.get("v3BannerDismissed");
+        var warningBannerDismissed = pm.settings.get("v3WarningBannerDismissed");
 
-        if(!bannerDismissed) {
+        if(!warningBannerDismissed) {
             this.initV3BannerPopover();
         } else {
             this.initV3SidebarPopover();
@@ -326,23 +326,11 @@ pm.layout = {
     initV3BannerPopover: function() {
         var that = this;
         $("#v3-banner").slideDown();
-        $("#banner-new-version").popover({
-            animation: false,
-            content: Handlebars.templates.v3_carousel(),
-            placement: "bottom",
-            trtgger: "manual",
-            html: true,
-            container: '.v3-popover-wrapper'
-        }).on("click", function () {
-            that.showV3Popover(this, "topbar");
-            tracker.sendAppView("virtualScreen/upgrade2/notification_click");
-        });
-        tracker.sendAppView("virtualScreen/upgrade2/notification_shown");
 
         var that = this;
         $(".banner-close").on("click", function(){
             that.dismissV3BannerPopover();
-            that.initV3SidebarPopover();
+            // that.initV3SidebarPopover();
         });
     },
 
@@ -367,7 +355,7 @@ pm.layout = {
         $('.v3-popover-wrapper').hide();
         $("#v3-banner").slideUp();
 
-        pm.settings.set("v3BannerDismissed", true);
+        pm.settings.set("v3WarningBannerDismissed", true);
     },
 
     showV3Popover: function(popover, location) {
