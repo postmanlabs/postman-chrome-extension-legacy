@@ -314,7 +314,9 @@ pm.layout = {
     },
 
     showV3Onboarding: function() {
-        var warningBannerDismissed = pm.settings.get("v3WarningBannerDismissed");
+        var warningBannerDismissed = false;
+        //always show on app load
+        //pm.settings.get("v3WarningBannerDismissed");
 
         if(!warningBannerDismissed) {
             this.initV3BannerPopover();
@@ -330,7 +332,6 @@ pm.layout = {
         var that = this;
         $(".banner-close").on("click", function(){
             that.dismissV3BannerPopover();
-            // that.initV3SidebarPopover();
         });
     },
 
@@ -354,8 +355,6 @@ pm.layout = {
         $("#banner-new-version").popover('hide');
         $('.v3-popover-wrapper').hide();
         $("#v3-banner").slideUp();
-
-        pm.settings.set("v3WarningBannerDismissed", true);
     },
 
     showV3Popover: function(popover, location) {
