@@ -72,56 +72,9 @@ pm.layout = {
             tracker.sendEvent('upgrade', 'click');
         });
 
-        var supportContent = "<div class='supporters'><div class='supporter clearfix'>";
-        supportContent += "<div class='supporter-image supporter-image-mashape'>";
-        supportContent += "<a href='http://www.getpostman.com/r?url=https://www.mashape.com/?utm_source=chrome%26utm_medium=app%26utm_campaign=postman' target='_blank'>";
-        supportContent += "<img src='img/supporters/mashape-new.png'/></a></div>";
-        supportContent += "<div class='supporter-tag'>Consume or provide cloud services with the Mashape API Platform</div></div>";
-
-        supportContent += "<div class='supporter clearfix'>";        
-        supportContent += "<div class='supporter-image supporter-image-mashape'>";
-        supportContent += "<a href='http://www.getpostman.com/r?url=http://restlet.com/?utm_source=POSTMAN' target='_blank'>";
-        supportContent += "<img src='img/supporters/restlet-new.png'/></a></div>";
-        supportContent += "<div class='supporter-tag'>The all-in-one platform for web APIs</div></div>";
-
-        supportContent += "<div class='supporter clearfix'>";        
-        supportContent += "<div class='supporter-image supporter-image-datalogics'>";
-        supportContent += "<a href='http://www.getpostman.com/r?url=http://www.datalogics.com//?utm_source=POSTMAN' target='_blank'>";
-        supportContent += "<img src='img/supporters/datalogics.jpg'/></a></div>";
-        supportContent += "<div class='supporter-tag'>Adobe eBook and PDF technologies for developers</div></div>";
-
-
-        var donateTimeout;
         $("#upgrade").popover();
 
         $('.banner-close').tooltip();
-
-        $('#donate').popover({
-            animation: false,
-            content: supportContent,
-            placement: "top",
-            trigger: "manual",
-            html: true,
-            title: "Postman is supported by some amazing companies"
-        }).on("mouseenter", function () {
-            var _this = this;
-            $(this).popover("show");
-            $(this).siblings(".popover").on("mouseleave", function () {
-                $(_this).popover('hide');
-            });
-            donateTimeout = setTimeout(function () {
-                //hover event here - number of times ad is seen
-                tracker.sendEvent('sponsors', 'view');
-            }, 1000);
-        }).on("mouseleave", function () {
-            var _this = this;
-            clearTimeout(donateTimeout);
-            setTimeout(function () {
-                if (!$(".popover:hover").length) {
-                    $(_this).popover("hide");
-                }
-            }, 100);
-        });
 
         $('#response-body-toggle').on("click", function () {
             pm.request.response.toggleBodySize();
