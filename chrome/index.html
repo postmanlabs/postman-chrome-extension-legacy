@@ -106,6 +106,7 @@
                 <li data-id="basicAuth">Basic Auth</li>
                 <li data-id="digestAuth">Digest Auth</li>
                 <li data-id="oAuth1">OAuth 1.0</li>
+                <li data-id="AWSSig4Auth">AWS Sig4 Auth</li>
             </ul>
             <div id="environment-selector-wrapper">
                 <div id="environment-quicklook-wrapper">
@@ -377,6 +378,64 @@
                 <div class="request-helper-form-description">
                     <h4>Note</h4>
                     If auto addition is enabled, OAuth parameters will be added when you send the request
+                </div>
+            </div>
+            <div id="request-helper-AWSSig4Auth" class="request-helpers">
+                <div class="request-helper-form-container">
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Access Key Id</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-awssig4-accesskeyid" class="clean-input"
+                                       key="awssig4_accesskeyid"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Secret Access Key</label>
+
+                            <div class="controls">
+                                <input type="password" id="request-helper-awssig4-secretaccesskey" class="clean-input"
+                                       key="awssig4_secretaccesskey"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Service</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-awssig4-service" class="clean-input"
+                                       key="awssig4_service"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Region</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-awssig4-region" class="clean-input"
+                                       key="awssig4_region"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">X-Amz-Date</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-awssig4-amzdate" class="clean-input"
+                                       key="awssig4_amzdate"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a
+                                        class="btn btn-secondary request-helper-submit"
+                                        data-type="awssig4">Refresh headers</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="request-helper-form-description">
+                    <h4>Note</h4>
+                    The authorization and x-amz-date headers will be generated and added as a custom header.
+                    <b>DO NOT</b> user AWS root account access keys! Create an IAM user with the least possible privilege and add an access key to this account.
                 </div>
             </div>
         </div>
@@ -1261,6 +1320,8 @@
 <script type="text/javascript" src="js/noty/themes/default.js"></script>
 
 <script type="text/javascript" src="js/crypto/rollups/md5.js"></script>
+<script type="text/javascript" src="js/crypto/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="js/crypto/rollups/sha256.js"></script>
 
 <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script type="text/javascript" src="js/dropbox/sha1.js"></script>
